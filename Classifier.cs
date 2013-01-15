@@ -30,7 +30,20 @@ namespace BayesClassifier
 {
     public class Classifier
     {
-        private readonly Dictionary<string, Category> _categories = new Dictionary<string, Category>();
+        private readonly Dictionary<string, Category> _categories;
+
+        public Classifier()
+        {
+            _categories = new Dictionary<string, Category>(StringComparer.CurrentCultureIgnoreCase);
+        }
+
+        public Classifier(bool caseSensitive)
+        {
+            if(caseSensitive)
+                _categories = new Dictionary<string, Category>();
+            else
+                _categories = new Dictionary<string, Category>(StringComparer.CurrentCultureIgnoreCase);
+        }
 
         private Category GetCategory(string name)
         {

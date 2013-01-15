@@ -25,6 +25,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace BayesClassifier
 {
@@ -84,7 +85,10 @@ namespace BayesClassifier
         /// <returns>The total amount of words in the category.</returns>
         public int PhraseCount()
         {
-            return _phrases.Sum(kvp => kvp.Value);
+            int total = 0;
+            foreach (var kvp in _phrases)
+                total = checked(total + kvp.Value);
+            return total;
         }
 
         /// <summary>
